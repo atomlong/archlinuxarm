@@ -1,5 +1,5 @@
 [Unit]
-Description=Kodi standalone (GBM)
+Description=Kodi standalone
 After=remote-fs.target network-online.target nss-lookup.target sound.target bluetooth.target polkit.service upower.service mysqld.service
 Wants=network-online.target polkit.service upower.service
 Conflicts=getty@tty1.service
@@ -8,9 +8,13 @@ Conflicts=getty@tty1.service
 User=kodi
 Group=kodi
 TTYPath=/dev/tty1
-Environment=WINDOWING=gbm
+EnvironmentFile=/etc/conf.d/kodi-framebuffer
+ExecStartPre=+/bin/sh -c 'echo 0 > /sys/class/vtconsole/vtcon1/bind'
+ExecStartPre=+/usr/bin/fbset -g 8 8 8 8 32
 ExecStart=/usr/bin/kodi-standalone
-ExecStop=/usr/bin/killall --user kodi --exact --wait kodi-gbm
+ExecStop=/usr/bin/killall --user kodi --exact --wait kodi-rbpi
+ExecStopPost=+/usr/bin/fbset -g $RESTOREMODE
+ExecStopPost=+/bin/sh -c 'echo 1 > /sys/class/vtconsole/vtcon1/bind'
 Restart=on-abort
 StandardInput=tty
 StandardOutput=journal

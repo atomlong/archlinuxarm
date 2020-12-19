@@ -6,8 +6,8 @@
 #  - removed AUTOBAHN_USE_NVX=1 from python build/install commands
 
 pkgname=python-autobahn
-pkgver=20.7.1
-pkgrel=3
+pkgver=20.12.2
+pkgrel=1
 pkgdesc='Real-time framework for Web, Mobile & Internet of Things'
 arch=(x86_64)
 url='https://crossbar.io/autobahn/'
@@ -34,7 +34,7 @@ optdepends=(
 )
 
 source=(https://files.pythonhosted.org/packages/source/a/autobahn/autobahn-$pkgver.tar.gz)
-sha256sums=('86bbce30cdd407137c57670993a8f9bfdfe3f8e994b889181d85e844d5aa8dfb')
+sha256sums=('72b68a1ce1e10e3cbcc3b280aae86d5b2e7a1f409febab1ab91a8a3274113f6e')
 
 prepare() {
   cd "$srcdir/autobahn-$pkgver"
